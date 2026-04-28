@@ -2,25 +2,65 @@
 
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="main.css">
-  <script type="text/javascript" src="main.js" defer> </script>
-  <title>tracker</title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <script type="text/javascript" src="quotes.js"> </script>
+    <script type="text/javascript" src="main.js" defer> </script>
+    <title>tracker</title>
+  </head>
 
-<!--
-COLORS:
-#22577A  #38A3A5  #57CC99  #80ED99  #CF9CC
-Baltic   Teal     Mint     Light G  Tea G
--->
+  <body class="bg-[#212529] text-white h-100%">
+    <div id="container" class="
+             min-h-screen
+             flex flex-col gap-4
+             items-center justify-center
+             text-center
+             ">
+      <header class="text-center mb-6">
+        <h1 class="text-3xl font-bold tracking-wide bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 text-transparent bg-clip-text">
+          Workout Tracker
+        </h1>
 
-<body class="bg-[#22577A] text-white">
-  <div id="container">
-    <button id="done-btn">done</button>
-    <div id="count">count</div>
-  </div>
-</body>
+        <p id="quote" class="text-sm text-gray-400 mt-1"></p>
+      </header>
+      <div>
+        <table class="
+          w-full max-w-md rounded-2xl bg-[#343A40] 
+          text-white overflow-hidden
+          ">
+          <tr>
+            <td>Total</td>
+            <td id="count">Value</td>
+          </tr>
+          <tr>
+            <td>Streak</td>
+            <td id="streak">Value</td>
+          </tr>
+        </table>
+      </div>
+      <button
+          id="done-btn"
+          class="
+                 w-32 h-32
+                 rounded-full
+                 text-white font-semibold tracking-wider
+                 bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500
+                 shadow-lg shadow-violet-500/40
+                 hover:scale-105 active:scale-95
+                 transition-all duration-200 ease-out
+                 flex items-center justify-center
+                 relative overflow-hidden
+                 ">
+          <span class="z-10">DONE</span>
+
+          <!-- subtle glow layer -->
+          <div class="absolute inset-0 opacity-30 blur-xl bg-white/20"></div>
+      </button>
+      <button id="debug-btn">debug OFF</button>
+      <button id="empty-btn">empty</button>
+    </div>
+  </body>
 
 </html>

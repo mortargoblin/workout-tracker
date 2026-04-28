@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+tr {
+  border-bottom: 1px solid #CED4DA;
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+tr > td {
+  padding-left: 10px;
+  text-align: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+td:last-child {
+  padding-right: 10px;
+  text-align: right;
+}
+
+#empty-btn {
+  display: none;
+}
