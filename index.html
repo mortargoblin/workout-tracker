@@ -27,9 +27,9 @@
       </header>
       <div>
         <table class="
-          w-full max-w-md rounded-2xl bg-[#343A40] 
-          text-white overflow-hidden
-          ">
+                      w-full max-w-md rounded-2xl bg-[#343A40] 
+                      text-white overflow-hidden
+                      ">
           <tr>
             <td>Total</td>
             <td id="count">Value</td>
@@ -39,6 +39,27 @@
             <td id="streak">Value</td>
           </tr>
         </table>
+      </div>
+      <div class="flex flex-row gap-3">
+        <button 
+           id="stats-btn" 
+           class="
+                  bg-[#343A40]
+                  rounded-xl
+                  px-4 py-2
+                  ">
+          Stats
+        </button>
+        <select
+            id="type-selector"
+            class="
+                   bg-[#343A40]
+                   rounded-xl
+                   px-4 py-2
+                   ">
+          <option value="strength">strength</option>
+          <option value="cardio">cardio</option>
+        </select>
       </div>
       <button
           id="done-btn"
@@ -53,14 +74,52 @@
                  flex items-center justify-center
                  relative overflow-hidden
                  ">
-          <span class="z-10">DONE</span>
+        <span class="z-10">DONE</span>
 
-          <!-- subtle glow layer -->
-          <div class="absolute inset-0 opacity-30 blur-xl bg-white/20"></div>
+        <!-- glow -->
+        <div class="absolute inset-0 opacity-30 blur-xl bg-white/20"></div>
       </button>
       <button id="debug-btn">debug OFF</button>
       <button id="empty-btn">empty</button>
     </div>
+
+    <!-- STATS DIALOG -->
+    <dialog
+        id="stats-dialog"
+        class="
+               w-[90%] max-w-md
+               rounded-2xl
+               bg-[#343A40]
+               text-white
+               p-0 m-auto
+               backdrop:bg-black/60
+               "
+        >
+      <div class="p-6 flex flex-col gap-6">
+
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-bold">Stats</h2>
+          <button
+              id="close-dialog-btn"
+              class="
+                     px-3 py-1
+                     rounded-lg
+                     bg-[#495057]
+                     hover:bg-[#6C757D]
+                     "
+              >
+              ✕
+          </button>
+        </div>
+
+        <div>
+          <h3 class="text-sm text-gray-400 mb-2">Workout History</h3>
+          <ul id="history-list" class="space-y-2">
+          </ul>
+        </div>
+        <!-- TODO: maybe add distribution here?? -->
+      </div>
+    </dialog>
   </body>
 
 </html>

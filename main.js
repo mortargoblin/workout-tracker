@@ -52,7 +52,7 @@ function considerStreak(dates) {
 
 function logDay() {
   const today = new Date().toLocaleDateString("en-CA");
-  const type = 'type';
+  const type = document.querySelector('#type-selector').value;
   const workouts = JSON.parse(localStorage.getItem('workouts')) || [];
 
   // makes sure the same day cant be logged twice
@@ -84,14 +84,25 @@ function logDay() {
   }
 }
 
-function renderTable() {
+function render() {
   document.querySelector('#count').textContent = getCount() + ' 🏅';
   document.querySelector('#streak').textContent = getStreak() + ' 🔥';
 }
 
+function renderStats() {
+  const workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+  const list = document.querySelector('#history-list');
+  list.innerHTML = '';
+  workouts.forEach((workout) => {
+    list.insertAdjacentHTML('afterbegin', 
+      `<li>${workout.date} — ${workout.type}</li>`
+    );
+  });
+}
+
 document.querySelector('#done-btn').addEventListener('click', (e) => {
   logDay();
-  renderTable();
+  render();
   e.target.animate(
     [
       { transform: "scale(1)" },
@@ -115,8 +126,19 @@ debugBtn.addEventListener('click', () => {
 
 emptyBtn.addEventListener('click', () => {
   localStorage.clear();
-  renderTable();
+  render();
+});
+
+// stats dialog stuff
+const dialog = document.querySelector('#stats-dialog');
+document.querySelector('#stats-btn').addEventListener('click', () => {
+  dialog.showModal();
+  renderStats();
+});
+
+document.querySelector('#close-dialog-btn').addEventListener('click', () => {
+  dialog.close();
 });
 
 quoteBox.textContent = quote();
-renderTable();
+render();
