@@ -32,26 +32,31 @@ function setStreak(num) {
 function considerStreak(dates) {
   const currentStreak = getStreak();
 
-  const today = dates[dates.length - 1];
-  const last = dates[dates.length - 2] || false;
+  if (dates.length === 1) {
+    setStreak(1);
+    return;
+  }
 
-  if (!last) setStreak(1);
+  const today = new Date(dates[dates.length - 1]);
+  const last = new Date(dates[dates.length - 2]);
 
-  const todayDate = new Date(today);
-  const lastDate = new Date(last);
+  today.setHours(0,0,0,0);
+  last.setHours(0,0,0,0);
 
-  const diffInMs = todayDate - lastDate;
+  const diffInMs = today - last;
   const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-  if (diffInDays < 3 && diffInDays > 0) setStreak(currentStreak + 1);
-
-  if (diffInDays === 0) setStreak(currentStreak);
-
-  setStreak(1);
+  if (diffInDays < 3 && diffInDays > 0) {
+    setStreak(currentStreak + 1);
+  } else if (diffInDays === 0) {
+    setStreak(currentStreak);
+  } else {
+    setStreak(1);
+  }
 }
 
-function logDay() {
-  const today = new Date().toLocaleDateString("en-CA");
+function logDay(customDate = null) {
+  const today = customDate || new Date().toLocaleDateString("en-CA");
   const type = document.querySelector('#type-selector').value;
   const workouts = JSON.parse(localStorage.getItem('workouts')) || [];
 
@@ -70,6 +75,8 @@ function logDay() {
       date: today
     });
 
+    dates.push(today);
+
     incrementCount();
     quoteBox.textContent = quote();
 
@@ -82,6 +89,7 @@ function logDay() {
   } else {
     quoteBox.textContent = 'Huomen uusiks';
   }
+  render();
 }
 
 function render() {
@@ -102,7 +110,6 @@ function renderStats() {
 
 document.querySelector('#done-btn').addEventListener('click', (e) => {
   logDay();
-  render();
   e.target.animate(
     [
       { transform: "scale(1)" },
